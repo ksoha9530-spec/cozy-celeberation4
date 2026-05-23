@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Cozy Celebration</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav>
+    <div class="logo">🎀 Cozy Celebrations</div>
+
+    <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+</nav>
+
+<!-- HERO -->
+<header>
+    <div class="hero-text">
+        <h1>Cozy Gatherings<br>Beautiful Memories</h1>
+        <p>Elegant balloon & fairy light decoration for small intimate events.</p>
+       <a href="#booking">
+   <button onclick="openBooking()">Book Your Event</button>
+</a>
+    </div>
+</header>
+
+<!-- ABOUT -->
+<section id="about" class="about">
+    <h2>About Us</h2>
+    <p>
+        We design aesthetic decoration setups for birthdays, bridal showers,
+        baby showers and cozy home events with beautiful themes.
+    </p>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="services">
+    <h2>Our Services</h2>
+
+    <div class="service-boxes">
+
+       <div class="box" onclick="toggleService(this)">
+            <img src="bride to be.png">
+            Bridal Shower Decoration
+            <div class="details">
+        <p>Elegant pastel bridal setup with balloons and fairy lights.</p>
+        <b>Price: 7000 - 10000 PKR</b>
+        </div>
+        </div>
+
+        <div class="box" onclick="toggleService(this)">
+            <img src="baby shower.png">
+           Baby Shower Decoration
+
+    <div class="details">
+        <p>Soft pastel baby shower decoration with cozy aesthetic theme.</p>
+        <b>Price: 7000 - 10000 PKR</b>
+    </div>
+</div>
+
+     
+<div class="box" onclick="toggleService(this)">
+            <img src="birthday.png">
+            Birthday Decoration
+
+    <div class="details">
+        <p>Beautiful balloon + fairy light birthday setup for small events.</p>
+        <b>Price: 7000 - 10000 PKR</b>
+    </div>
+</div>
+
+      <div class="box" onclick="toggleService(this)">
+            <img src="together.png">
+            Together Events
+
+    <div class="details">
+        <p>Beautiful balloon + fairy light birthday setup for small events.</p>
+        <b>Price: 7000 - 10000 PKR</b>
+    </div>
+</div>
+
+
+    </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery" class="gallery">
+    <h2>Gallery</h2>
+
+    <div class="gallery-images">
+        <img src="1.png">
+        <img src="2.png">
+        <img src="3.png">
+        <img src="ChatGPT Image May 23, 2026, 05_39_00 PM.png">
+    </div>
+</section>
+<section id="booking" class="booking hidden">
+    <h2>Book Your Event</h2>
+
+    <form>
+        <input type="text" placeholder="Your Name">
+        <input type="email" placeholder="Email">
+        <input type="phone number" placeholder="Phone Number">
+        <input type="Address" placeholder="Address">
+         <textarea placeholder="Message"></textarea>
+
+    <button type="submit">Send Booking</button>
+</form>
+
+</section>
+<h2>Leave Your Feedback 💕</h2>
+
+<form id="feedbackForm">
+
+<input type="text" id="feedbackName" placeholder="Your Name" required>
+
+<textarea id="feedbackMessage" placeholder="Write your feedback..." required></textarea>
+
+<button type="submit">Submit Feedback</button>
+
+</form>
+
+<!-- FEEDBACK DISPLAY -->
+<div id="feedbackList"></div>
+
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact">
+    <h2>Contact Us</h2>
+    <p>Email: cozycelebration@gmail.com</p>
+    <p>Phone: +92 3345096971</p>
+</section>
+
+<script>
+function toggleService(box){
+    box.classList.toggle("active");
+}
+</script>
+
+<!-- FOOTER -->
+<footer>
+    <p>© 2026 Cozy Celebrations</p>
+</footer>
+<script>
+
+function openBooking(){
+
+    let booking = document.getElementById("booking");
+
+    // show form
+    booking.classList.add("active");
+
+    // scroll to form
+    booking.scrollIntoView({behavior:"smooth"});
+
+}
+
+</script>
+
+
+<script>
+
+const feedbackForm = document.getElementById("feedbackForm");
+const feedbackList = document.getElementById("feedbackList");
+
+/* LOAD SAVED FEEDBACKS */
+window.onload = function(){
+
+    let savedFeedbacks = JSON.parse(localStorage.getItem("feedbacks")) || [];
+
+    savedFeedbacks.forEach(feedback => {
+        showFeedback(feedback.name, feedback.message);
+    });
+
+};
+
+/* FORM SUBMIT */
+feedbackForm.addEventListener("submit", function(e){
+
+    e.preventDefault();
+
+    let name = document.getElementById("feedbackName").value;
+    let message = document.getElementById("feedbackMessage").value;
+
+    /* SHOW ON SCREEN */
+    showFeedback(name, message);
+
+    /* SAVE TO LOCAL STORAGE */
+    let feedbacks = JSON.parse(localStorage.getItem("feedbacks")) || [];
+
+    feedbacks.push({
+        name:name,
+        message:message
+    });
+
+    localStorage.setItem("feedbacks", JSON.stringify(feedbacks));
+
+    feedbackForm.reset();
+
+});
+
+/* DISPLAY FUNCTION */
+function showFeedback(name, message){
+
+    let card = document.createElement("div");
+
+    card.classList.add("feedback-card");
+
+    card.innerHTML = `
+        <h4>${name}</h4>
+        <p>${message}</p>
+    `;
+
+    feedbackList.prepend(card);
+
+}
+
+</script>
+
+<a class="whatsapp" 
+href="https://wa.me/03345096971" 
+target="_blank">
+💬
+</a>
+
+</body>
+</html>
